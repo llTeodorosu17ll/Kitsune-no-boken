@@ -8,12 +8,19 @@ public class CoinCollect : MonoBehaviour
 {
 
     public Text MyscoreText;
-    private float ScoreNum;
+    public float ScoreNum;
+    private AdsInitializer adsInit;
+
 
 
     void Start(){
         ScoreNum = PlayerPrefs.GetFloat("score");
         MyscoreText.text = "Score : " + ScoreNum;
+    }
+
+    public void CoinReward()
+    {
+        MyscoreText.text = "Score : " + ScoreNum + 3;
     }
 
     private void OnTriggerEnter2D(Collider2D Coin){
@@ -24,10 +31,18 @@ public class CoinCollect : MonoBehaviour
         }
     }
 
-    void FixedUpdate(){
+    public void rewardTaken()
+    {
+        ScoreNum++;
+        ScoreNum++;
+        ScoreNum++;
+        MyscoreText.text = "Score : " + ScoreNum;
+    }
 
+    void FixedUpdate()
+    {
         PlayerPrefs.SetFloat("score", ScoreNum);
-        Debug.Log("Score: " + PlayerPrefs.GetFloat("score"));
+        //Debug.Log("Score: " + PlayerPrefs.GetFloat("score"));
         PlayerPrefs.Save();
 
     }
